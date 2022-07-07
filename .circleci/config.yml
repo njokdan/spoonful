@@ -40,7 +40,8 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo '$CIRCLE_WORKFLOW_ID'
+      - run: echo "My pipeline id is << pipeline.id >>"
+      - run: echo $CIRCLE_WORKFLOW_ID
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 # workflows:
