@@ -17,6 +17,12 @@ version: 2.1
     #   - run:
     #       name: "Say hello"
     #       command: "echo Hello, World!"
+    
+commands:
+  print_pipeline_ids:
+    steps:
+      - run: echo ${CIRCLE_WORKFLOW_ID}
+
 jobs:
   save_hello_world_output:
     docker:
@@ -44,6 +50,12 @@ jobs:
     steps:
       - run: echo "My pipeline id is << pipeline.id >>"
       - run: echo $CIRCLE_WORKFLOW_ID
+  
+  my_job:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - print_pipeline_ids
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 # workflows:
@@ -59,4 +71,5 @@ workflows:
           requires:
             - save_hello_world_output
       - print_pipeline_id
+      - my_job
           
